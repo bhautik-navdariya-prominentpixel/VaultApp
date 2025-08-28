@@ -35,12 +35,12 @@ const AdminHeader = () => {
           >
             Users
           </NavLink>
-          <a href='/admin/transactions' className='hover:text-slate-900 dark:hover:text-white'>
+          {/* <a href='/admin/transactions' className='hover:text-slate-900 dark:hover:text-white'>
             Transactions
           </a>
           <a href='/admin/settings' className='hover:text-slate-900 dark:hover:text-white'>
             Settings
-          </a>
+          </a> */}
         </nav>
 
         {/* Right Section */}
@@ -64,7 +64,7 @@ const AdminHeader = () => {
               />
             </button>
             <div className='absolute right-0  w-48 hidden group-hover:block bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg z-20'>
-              <a
+              {/* <a
                 href='/admin/profile'
                 className='block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               >
@@ -75,7 +75,7 @@ const AdminHeader = () => {
                 className='block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               >
                 Settings
-              </a>
+              </a> */}
               <button
                 onClick={onLogoutHandler}
                 className='block w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-left'

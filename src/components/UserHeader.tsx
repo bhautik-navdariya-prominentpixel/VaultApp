@@ -36,12 +36,6 @@ const UserHeader = () => {
           >
             Transactions
           </NavLink>
-          <a href='/cards' className='hover:text-slate-900 dark:hover:text-white'>
-            Cards
-          </a>
-          <a href='/payments' className='hover:text-slate-900 dark:hover:text-white'>
-            Payments
-          </a>
         </nav>
 
         {/* Right Section */}
@@ -67,7 +61,7 @@ const UserHeader = () => {
             >
               <span className='text-slate-700 dark:text-slate-200'>{currentUser.firstName}</span>
               <img
-                src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'
+                src='https://media.istockphoto.com/id/1130884625/vector/user-member-vector-icon-for-ui-user-interface-or-profile-face-avatar-app-in-circle-design.jpg?s=612x612&w=0&k=20&c=1ky-gNHiS2iyLsUPQkxAtPBWH1BZt0PKBB1WBtxQJRE='
                 alt='profile'
                 className='w-8 h-8 rounded-full border border-gray-300 dark:border-gray-600'
               />
@@ -75,20 +69,6 @@ const UserHeader = () => {
 
             {menuOpen && (
               <div className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg z-20'>
-                <a
-                  href='/profile'
-                  className='px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'
-                >
-                  <Settings className='w-4 h-4' />
-                  Profile
-                </a>
-                <a
-                  href='/settings'
-                  className='px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2'
-                >
-                  <Settings className='w-4 h-4' />
-                  Settings
-                </a>
                 <button
                   className='w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-left flex items-center gap-2'
                   onClick={onLogoutHandler}

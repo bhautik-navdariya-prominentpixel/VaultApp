@@ -30,11 +30,11 @@ export default function SendMoneyPage() {
         pending: "Transfering...",
         success: "Transfer Completed!",
       });
+      dispach(updateBalance(currentUser.balance - transaction.amount));
+      navigate('/user/');
     } catch (e) {
       toast.error(e as string);
     }
-    dispach(updateBalance(currentUser.balance - transaction.amount));
-    navigate('/user/');
   }
   return (
     <main className='p-6 flex justify-center'>

@@ -1,4 +1,4 @@
-import { ArrowDownLeft, ArrowUpRight, CreditCard, Download, Eye, EyeOff, Send } from "lucide-react";
+import { Eye, EyeOff, Send } from "lucide-react";
 import { useState } from "react";
 import { getFormattedRuppies } from "../../utils/utils";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import TransactionList from "../../components/Transaction/TransactionList";
 
 export default function BankingApp() {
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
-  const currentUser = useSelector((store:StoreType)=>store.auth.user);
+  const currentUser = useSelector((store: StoreType) => store.auth.user);
 
   const toggleBalanceVisibility = () => {
     setIsBalanceVisible(!isBalanceVisible);
@@ -35,7 +35,9 @@ export default function BankingApp() {
                   <p className='text-blue-100 text-sm mb-2'>Available Balance</p>
                   <div className='flex items-center gap-4'>
                     {isBalanceVisible ? (
-                      <h2 className='text-4xl lg:text-5xl font-bold'>{getFormattedRuppies(currentUser.balance)}</h2>
+                      <h2 className='text-4xl lg:text-5xl font-bold'>
+                        {getFormattedRuppies(currentUser.balance)}
+                      </h2>
                     ) : (
                       <h2 className='text-4xl lg:text-5xl font-bold'>••••••</h2>
                     )}
@@ -51,24 +53,33 @@ export default function BankingApp() {
                     </button>
                   </div>
                 </div>
-                <CreditCard className='w-10 h-10 text-blue-200' />
+                <div>
+                  <p className='text-blue-100 text-sm mb-2'>Account No.</p>
+                  <div className='flex items-center gap-4'>
+                    <h2 className='font-bold'>{currentUser.accountNo}</h2>
+                  </div>
+                </div>
+                {/* <CreditCard className='w-10 h-10 text-blue-200' /> */}
               </div>
 
               <div className='flex gap-4 mt-8'>
-                <Link to={"transfer"} className='flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl py-4 px-6 flex items-center justify-center gap-3 hover:bg-opacity-30 transition-colors'>
+                <Link
+                  to={"transfer"}
+                  className='flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl py-4 px-6 flex items-center justify-center gap-3 hover:bg-opacity-30 transition-colors'
+                >
                   <Send className='w-6 h-6' />
                   <span className='font-semibold text-lg text-slate-800'>Transfer Money</span>
                 </Link>
-                <button className='flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl py-4 px-6 flex items-center justify-center gap-3 hover:bg-opacity-30 transition-colors'>
+                {/* <button className='flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl py-4 px-6 flex items-center justify-center gap-3 hover:bg-opacity-30 transition-colors'>
                   <Download className='w-6 h-6' />
                   <span className='font-semibold text-lg text-slate-800'>Request Money</span>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
 
           {/* Quick Stats */}
-          <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8'>
+          {/* <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8'>
             <div className='bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6'>
               <div className='flex items-center justify-between'>
                 <div>
@@ -96,19 +107,22 @@ export default function BankingApp() {
                 <CreditCard className='w-8 h-8 text-blue-600' />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Right Column - Transaction History (Desktop sidebar, Mobile full width) */}
         <div className='lg:col-span-1'>
           <div className='flex justify-between items-center mb-6'>
             <h3 className='text-xl font-semibold'>Recent Transactions</h3>
-            <Link to={"/user/transactions"} className='text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors'>
+            <Link
+              to={"/user/transactions"}
+              className='text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors'
+            >
               See all
             </Link>
           </div>
 
-          <TransactionList type="PARTIAL"/>
+          <TransactionList type='PARTIAL' />
         </div>
       </div>
 
