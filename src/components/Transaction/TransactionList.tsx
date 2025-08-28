@@ -33,6 +33,9 @@ const TransactionList = (props: { type: "FULL" | "PARTIAL"; userId?: string }) =
             <Loading />
           </div>
         )}
+        {!isLoading && props.type === "PARTIAL" && transactionData.length === 0 && (
+          <div className="flex items-center justify-center pt-15 text-slate-700 text-2xl">No Transaction To Display</div>
+        )}
         {!isLoading &&
           props.type === "PARTIAL" &&
           transactionData.map((transaction) => (

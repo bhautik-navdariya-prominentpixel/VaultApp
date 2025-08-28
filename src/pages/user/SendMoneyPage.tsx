@@ -52,7 +52,7 @@ export default function SendMoneyPage() {
             {/* Account Number */}
             <div>
               <Input
-                type='text'
+                type='number'
                 name='reciverAccount'
                 placeholder='Enter recipient account no.'
                 label='Account Number'

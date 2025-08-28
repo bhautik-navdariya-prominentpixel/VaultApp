@@ -56,6 +56,9 @@ export const getAllTransactionApi = async (userId: string) => {
       },
     });
     // return res.data;
+    if(!transactionRes.data){
+      return [];
+    }
     return convertFirebaseObject<TransactionModel[]>(transactionRes.data);
   } catch (error) {
     throw error;
@@ -70,6 +73,9 @@ export const getTop10TransactionApi = async (userId: string) => {
         limitToLast: 5,
       },
     });
+    if(!transactionRes.data){
+      return [];
+    }
     return convertFirebaseObject<TransactionModel[]>(transactionRes.data);
   } catch (error) {
     throw error;
