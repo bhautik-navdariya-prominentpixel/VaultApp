@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUser } from "../store/auth-slice";
 import type { StoreType } from "../store";
-import { Bell, LogOut, Menu, Settings, X } from "lucide-react";
+import { Bell, LogOut, Menu, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const UserHeader = () => {
