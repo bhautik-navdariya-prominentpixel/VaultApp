@@ -24,6 +24,9 @@ export const login = async (user: LoginModel) => {
     if (Object.keys(res.data).length === 0) {
       throw "Invalid Username or Password";
     }
+    if(res.data[Object.keys(res.data)[0]].password != user.password){
+      throw "Invalid Username or Password";
+    }
     return convertFirebaseObject<UserModel[]>(res.data)[0];
   } catch (error) {
     throw error;
