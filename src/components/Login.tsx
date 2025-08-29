@@ -8,18 +8,26 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../store/auth-slice";
 import { globalTostTheme } from "../utils/tost-config";
 import { setUserLogin } from "../utils/auth-util";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/theme-context";
 
 const Login = () => {
   const dispach = useDispatch();
   const navigate = useNavigate();
+  const appTheme = useContext(ThemeContext);
+
   async function onSubmitForm(user: LoginModel) {
-    const loginResponse = await toast.promise(login(user), {
-      pending: "Loading...",
-      error: "Invalid Email or Password!",
-      success: "Login Successfully!",
-    }, globalTostTheme);
+    const loginResponse = await toast.promise(
+      login(user),
+      {
+        pending: "Loading...",
+        error: "Invalid Email or Password!",
+        success: "Login Successfully!",
+      },
+      {...globalTostTheme, ...{theme: appTheme}}
+    );
     dispach(loginUser(loginResponse));
-    if(user.rememberMe){
+    if (user.rememberMe) {
       setUserLogin(loginResponse);
     }
     if (loginResponse.isAdmin) {
@@ -29,7 +37,7 @@ const Login = () => {
   }
   return (
     <div className='w-full max-w-md'>
-      <div className='bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-2xl shadow-lg p-8'>
+      <div className='bg-primary dark:bg-primary-dark border border-gray-300 dark:border-gray-700 rounded-2xl shadow-lg p-8'>
         <h2 className='text-2xl font-semibold text-center mb-6 text-slate-900 dark:text-slate-200'>
           Login to Your Account
         </h2>
@@ -63,11 +71,7 @@ const Login = () => {
               {/* Remember me + Forgot password */}
               <div className='flex items-center justify-between text-sm'>
                 <div className='flex items-center space-x-2'>
-                  <Input
-                    type='checkbox'
-                    name='rememberMe'
-                    label="Remember me"
-                  />
+                  <Input type='checkbox' name='rememberMe' label='Remember me' />
                 </div>
               </div>
 

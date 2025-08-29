@@ -8,11 +8,16 @@ import { transferMoneyApi } from "../../api/TransactionApi";
 import { toast } from "react-toastify";
 import { updateBalance } from "../../store/auth-slice";
 import { Link, useNavigate } from "react-router-dom";
+import { globalTostTheme } from "../../utils/tost-config";
+import { ThemeContext } from "../../contexts/theme-context";
+import { useContext } from "react";
 
 export default function SendMoneyPage() {
   const currentUser = useSelector((store: StoreType) => store.auth.user);
   const dispach = useDispatch();
   const navigate = useNavigate();
+  const appTheme = useContext(ThemeContext);
+
   async function onFormSubmit(transaction: TransactionModel) {
     transaction.senderAccount = currentUser.accountNo;
     transaction.transactionType = "DEBIT";
@@ -21,17 +26,21 @@ export default function SendMoneyPage() {
       toast.error("Not Enought Balance in Your Account!");
       return;
     }
-    if(transaction.senderAccount === transaction.reciverAccount){
+    if (transaction.senderAccount == transaction.reciverAccount) {
       toast.error("Can Not Transfer Money in Same Account!");
       return;
     }
     try {
-      await toast.promise(transferMoneyApi(transaction, currentUser.balance), {
-        pending: "Transfering...",
-        success: "Transfer Completed!",
-      });
+      await toast.promise(
+        transferMoneyApi(transaction, currentUser.balance),
+        {
+          pending: "Transfering...",
+          success: "Transfer Completed!",
+        },
+        { ...globalTostTheme, ...{ theme: appTheme } }
+      );
       dispach(updateBalance(currentUser.balance - transaction.amount));
-      navigate('/user/');
+      navigate("/user/");
     } catch (e) {
       toast.error(e as string);
     }
@@ -91,7 +100,8 @@ export default function SendMoneyPage() {
 
             {/* Action Buttons */}
             <div className='flex justify-end gap-4 pt-4'>
-              <Link to={"/user/"}
+              <Link
+                to={"/user/"}
                 className='px-5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-slate-700 dark:text-slate-200 hover:bg-gray-200 dark:hover:bg-gray-600'
               >
                 Cancel

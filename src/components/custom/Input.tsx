@@ -34,7 +34,7 @@ const Input = (props: {
         name={props.name}
         id={props.name}
         placeholder={props.placeholder}
-        className='w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-slate-600 outline-none'
+        className='w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-slate-600 outline-none dark:text-white'
       />
     </>
   );

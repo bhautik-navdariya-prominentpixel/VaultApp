@@ -5,16 +5,23 @@ import { signUpUser } from "../api/authanticationApi";
 import { toast } from "react-toastify";
 import { globalTostTheme } from "../utils/tost-config";
 import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../contexts/theme-context";
+import { useContext } from "react";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const appTheme = useContext(ThemeContext);
   async function onSubmitForm(signUpData: SignUpModel) {
-    await toast.promise(signUpUser(signUpData), {
-      pending: "Sign Up user...",
-      success: "User Sign Up Successfully!",
-      error: "Failed to create user!",
-    }, globalTostTheme);
-    navigate('/');
+    await toast.promise(
+      signUpUser(signUpData),
+      {
+        pending: "Sign Up user...",
+        success: "User Sign Up Successfully!",
+        error: "Failed to create user!",
+      },
+      { ...globalTostTheme, ...{ theme: appTheme } }
+    );
+    navigate("/");
   }
   return (
     <div className='w-full max-w-2xl'>
@@ -91,7 +98,7 @@ const SignUp = () => {
                 <Input
                   type='checkbox'
                   name='acceptTerms'
-                  label="I accept the Privacy Policy & Terms"
+                  label='I accept the Privacy Policy & Terms'
                 />
               </div>
 

@@ -6,9 +6,12 @@ import { globalTostTheme } from "../utils/tost-config";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/custom/Input";
 import { updateUserApi } from "../api/UserApi";
+import { ThemeContext } from "../contexts/theme-context";
+import { useContext } from "react";
 
 const UserForm = (props: { type: "INSERT" | "UPDATE"; userData?: SignUpModel; id?: string }) => {
   const navigate = useNavigate();
+  const appTheme = useContext(ThemeContext);
   async function onSubmitForm(signUpData: SignUpModel) {
     if (props.type == "INSERT") {
       await toast.promise(
@@ -18,7 +21,7 @@ const UserForm = (props: { type: "INSERT" | "UPDATE"; userData?: SignUpModel; id
           success: "User Added Successfully!",
           error: "Failed to add user!",
         },
-        globalTostTheme
+        { ...globalTostTheme, ...{ theme: appTheme } }
       );
       navigate("/admin/users");
     } else {
@@ -29,7 +32,7 @@ const UserForm = (props: { type: "INSERT" | "UPDATE"; userData?: SignUpModel; id
           success: "User Update Successfully!",
           error: "Failed to Update user!",
         },
-        globalTostTheme
+        { ...globalTostTheme, ...{ theme: appTheme } }
       );
       navigate("/admin/users");
     }

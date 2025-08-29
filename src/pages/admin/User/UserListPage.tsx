@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import type { UserModel } from "../../../models/UserModel";
 import { deleteUserByIdApi, getAllUserApi } from "../../../api/UserApi";
@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 import { globalTostTheme } from "../../../utils/tost-config";
 import { getFormattedRuppies } from "../../../utils/utils";
 import { Info, Pen, Plus, Trash2 } from "lucide-react";
+import { ThemeContext } from "../../../contexts/theme-context";
 
 const UserListPage = () => {
   const [usersData, setUsersData] = useState<UserModel[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const appTheme = useContext(ThemeContext);
   useEffect(() => {
     getAllUserApi().then((user) => {
       setUsersData(user);
@@ -24,7 +26,7 @@ const UserListPage = () => {
         pending: "Deleting User...",
         success: "User Deleted Successfully!",
         error: "Failed to Delete User",
-      }, globalTostTheme);
+      },  { ...globalTostTheme, ...{ theme: appTheme } });
       setUsersData(usersData.filter((user) => user.id !== id));
     }
   }
@@ -111,7 +113,7 @@ const UserListPage = () => {
               responsive
               progressComponent={<Loading />}
               progressPending={isLoading}
-              // theme="dark"
+              theme={appTheme}
               // expandableRows
             />
           </div>

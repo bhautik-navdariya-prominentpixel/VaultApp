@@ -16,43 +16,46 @@ import AllTransactionPage from "./pages/user/AllTransactionPage";
 import UserTransactionPage from "./pages/admin/User/UserTransactionPage";
 
 const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <DefaultLayout />,
-      errorElement: <DefaultErrorPage />,
-      children: [
-        {
-          // index: true,
-          element: <AuthLayout />,
-          children: [
-            { index: true, element: <LoginPage /> },
-            { path: "signup", element: <SignUpPage /> },
-          ],
-        },
-        {
-          path: "admin",
-          element: <AdminLayout />,
-          children: [
-            { index: true, element: <HomePage /> },
-            { path: "users/", element: <UserListPage /> },
-            { path: "users/:id", element: <UserUpdate /> },
-            { path: "users/:userId/transactions", element: <UserTransactionPage /> },
-            { path: "users/new", element: <UserAddPage /> },
-          ],
-        },
-        {
-          path: "user",
-          element: <UserLayout />,
-          children: [
-            { index: true, element: <UserHomePage /> },
-            { path: "transfer", element: <SendMoneyPage /> },
-            { path: "transactions", element: <AllTransactionPage /> },
-          ],
-        },
-      ],
-    },
-  ], {basename: "/VaultApp/dist/"});
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <DefaultLayout />,
+        errorElement: <DefaultErrorPage />,
+        children: [
+          {
+            // index: true,
+            element: <AuthLayout />,
+            children: [
+              { index: true, element: <LoginPage /> },
+              { path: "signup", element: <SignUpPage /> },
+            ],
+          },
+          {
+            path: "admin",
+            element: <AdminLayout />,
+            children: [
+              { index: true, element: <HomePage /> },
+              { path: "users/", element: <UserListPage /> },
+              { path: "users/:id", element: <UserUpdate /> },
+              { path: "users/:userId/transactions", element: <UserTransactionPage /> },
+              { path: "users/new", element: <UserAddPage /> },
+            ],
+          },
+          {
+            path: "user",
+            element: <UserLayout />,
+            children: [
+              { index: true, element: <UserHomePage /> },
+              { path: "transfer", element: <SendMoneyPage /> },
+              { path: "transactions", element: <AllTransactionPage /> },
+            ],
+          },
+        ],
+      },
+    ],
+    { basename: "/VaultApp/dist/" }
+  );
   return <RouterProvider router={router}></RouterProvider>;
 };
 

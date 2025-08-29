@@ -2,6 +2,8 @@ import type { TransactionModel } from "../../models/TransactionModel";
 import DataTable from "react-data-table-component";
 import Loading from "../custom/Loading";
 import { getFormattedRuppies } from "../../utils/utils";
+import { ThemeContext } from "../../contexts/theme-context";
+import { useContext } from "react";
 const columns: any = [
   {
     name: "Transaction ID",
@@ -38,6 +40,7 @@ const columns: any = [
   },
 ];
 const TransactionDataTable = (props: { transactions: TransactionModel[]; isLoading: boolean }) => {
+  const appTheme = useContext(ThemeContext);
   return (
     <>
       <div className='min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6'>
@@ -58,7 +61,7 @@ const TransactionDataTable = (props: { transactions: TransactionModel[]; isLoadi
               responsive
               progressComponent={<Loading />}
               progressPending={props.isLoading}
-              // theme="dark"
+              theme={appTheme}
               // expandableRows
             />
           </div>
