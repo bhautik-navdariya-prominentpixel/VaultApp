@@ -20,7 +20,7 @@ const UserHeader = () => {
         <h1 className='text-2xl font-bold text-slate-800 dark:text-slate-200'>VaultPay</h1>
 
         {/* Desktop Navigation */}
-        <nav className='hidden md:flex items-center space-x-6 text-slate-700 dark:text-slate-300 font-medium'>
+        <nav className='md:flex items-center space-x-6 text-slate-700 dark:text-slate-300 font-medium'>
           <NavLink
             to='/user/'
             className='hover:text-slate-900 dark:hover:text-white'

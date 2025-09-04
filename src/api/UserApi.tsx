@@ -51,8 +51,6 @@ export const getUserByIdApi = async (id:string) => {
 
 
 export const deleteUserByIdApi = async (id:string) => {
-  console.log(id);
-  
   try {
     const apiResponse = await api.delete(`users/${id}.json`);
     

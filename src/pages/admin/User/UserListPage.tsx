@@ -9,11 +9,14 @@ import { globalTostTheme } from "../../../utils/tost-config";
 import { getFormattedRuppies } from "../../../utils/utils";
 import { Info, Pen, Plus, Trash2 } from "lucide-react";
 import { ThemeContext } from "../../../contexts/theme-context";
+import { useSelector } from "react-redux";
+import type { StoreType } from "../../../store";
 
 const UserListPage = () => {
   const [usersData, setUsersData] = useState<UserModel[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const appTheme = useContext(ThemeContext);
+  const currentUser = useSelector((store: StoreType)=>store.auth.user);
   useEffect(() => {
     getAllUserApi().then((user) => {
       setUsersData(user);
@@ -21,6 +24,10 @@ const UserListPage = () => {
     });
   }, []);
   async function deleteUser(id: string) {
+    if(currentUser.id == id){
+      alert("Can not delete yourself!")
+      return;
+    }
     if (confirm("Are You Sure?")) {
       await toast.promise(deleteUserByIdApi(id), {
         pending: "Deleting User...",

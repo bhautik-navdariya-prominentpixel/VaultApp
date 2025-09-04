@@ -1,19 +1,25 @@
 import { Eye, EyeOff, Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getFormattedRuppies } from "../../utils/utils";
 import { useSelector } from "react-redux";
 import type { StoreType } from "../../store";
 import { Link } from "react-router-dom";
 import TransactionList from "../../components/Transaction/TransactionList";
+import { getUserByIdApi } from "../../api/UserApi";
 
 export default function BankingApp() {
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
   const currentUser = useSelector((store: StoreType) => store.auth.user);
+  const [currentBalance, setCurrentBalance] = useState<number>(currentUser.balance);
 
   const toggleBalanceVisibility = () => {
     setIsBalanceVisible(!isBalanceVisible);
   };
-
+  useEffect(()=>{
+    getUserByIdApi(currentUser.id).then((user)=>{
+      setCurrentBalance(user.balance);
+    })
+  }, [])
   return (
     <div className='max-w-7xl mx-auto px-6 py-8'>
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
@@ -36,7 +42,7 @@ export default function BankingApp() {
                   <div className='flex items-center gap-4'>
                     {isBalanceVisible ? (
                       <h2 className='text-4xl lg:text-5xl font-bold'>
-                        {getFormattedRuppies(currentUser.balance)}
+                        {getFormattedRuppies(currentBalance)}
                       </h2>
                     ) : (
                       <h2 className='text-4xl lg:text-5xl font-bold'>••••••</h2>
